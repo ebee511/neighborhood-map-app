@@ -5,18 +5,17 @@ import "./index.css"
 import FourSquareAPI from './API/index.js'
 
 class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      venues: [],
-      markers: [], 
-      center: [],
-      zoom: 12,
-      updateSuperState: obj => {
-        this.setState(obj);
-      }
-    };
+  
+  state = {
+    venues: [],
+    markers: [], 
+    center: [],
+    zoom: 12,
+    updateSuperState: obj => {
+      this.setState(obj);
+    }
   };
+  
 
   closeAllMarkers = () => {
     const markers = this.state.markers.map(marker => {
@@ -39,14 +38,14 @@ class App extends Component {
   };
 
   handleListItemClick = venue => {
-    const marker = this.state.markers.find(marker => marker.id = venue.id);
+    const marker = this.state.markers.find(marker => marker.id === venue.id);
     this.handleMarkerClick(marker);
   };
 
   componentDidMount() {
     FourSquareAPI.search({
       near: "Tucson, AZ",
-      query: 'tacos',
+      query: 'coffee',
       limit: 10
     }).then(results => {
       const {venues} = results.response;
@@ -57,7 +56,7 @@ class App extends Component {
           lng: venue.location.lng,
           isOpen: false,
           isVisible: true,
-          id: venue.id
+          id: venue.id,
         };
       });
       this.setState({venues, center, markers});
@@ -67,7 +66,7 @@ class App extends Component {
 render() {
     return (
     <div className="App">
-      <SideBar {...this.state} handleListItemClick={this.handleListItemClick}/>
+      <SideBar {...this.state} {...this.props} handleListItemClick={this.handleListItemClick}/>
       <Map {...this.state} handleMarkerClick={this.handleMarkerClick}/>
     </div>
     );

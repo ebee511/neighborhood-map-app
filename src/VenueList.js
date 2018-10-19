@@ -1,18 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ListItem from './ListItem'
 
-class VenueList extends Component {
-	render() {
+
+const VenueList = (props) => {
 		return (
 			<ol className='venueList'>
-				{this.props.venues && 
-					this.props.venues.map((venue, index) => (
-						<ListItem key={index} {...venue} handleListItemClick={this.props.handleListItemClick}/> 
+				{props.venues && 
+					props.venues.map((venue, index) => (
+						<ListItem 
+							key={index} 
+							{...venue} 
+							handleListItemClick={props.handleListItemClick}
+						/> 
 					))
 				}
 			</ol>
-		);
-	}
+		)
 }
 
 export default VenueList;
