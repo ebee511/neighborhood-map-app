@@ -28,7 +28,10 @@ class Helper {
 		};
 		return fetch(`${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(urlParameters)}`,
 			requestData).then(res => res.json())
-		.catch(err => {console.log(err)});
+		.catch(err => {
+			alert(err)
+			console.log(err)
+		});
 	}
 }
 
