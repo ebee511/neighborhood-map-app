@@ -41,7 +41,7 @@ class Sidebar extends Component {
 
 	render() {
 		return (
-			<div className='sideBar'>
+			<aside className='sideBar' aria-role='Sidebar'>
 				<h1>Coffee Grinds</h1>
 				<input 
 					type = 'search'
@@ -56,7 +56,7 @@ class Sidebar extends Component {
 					venues = {this.handleFilterVenues()} 
 					handleListItemClick={this.props.handleListItemClick}
 				/>
-			</div>
+			</aside>
 		);
 	}
 }
