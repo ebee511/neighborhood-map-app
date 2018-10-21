@@ -48,6 +48,7 @@ class Sidebar extends Component {
 					placeholder='Filter Shops' 
 					onChange ={this.handleChange}
 					value = {this.state.query}
+					aria-label='Type here to search a venue'
 				/>
 				<VenueList 
 					{...this.props} 
