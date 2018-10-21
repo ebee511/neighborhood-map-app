@@ -1,3 +1,4 @@
+/* global google */
 import React, { Component } from 'react';
 import SideBar from './Sidebar.js'
 import Map from './Map.js'
@@ -11,6 +12,7 @@ class App extends Component {
     markers: [], 
     center: [],
     zoom: 12,
+    activeMarker: [],
     updateSuperState: obj => {
       this.setState(obj);
     }
@@ -27,15 +29,35 @@ class App extends Component {
 
   handleMarkerClick = (marker) => {
     this.closeAllMarkers();
+    // this.markerBounce(marker);
+
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(window.google.maps.Animation.BOUNCE);
+      setTimeout(() => {marker.setAnimation(null)}, 500)
+    }
+    
     marker.isOpen = true;
+    this.state.activeMarker = marker;
+    this.setState({activeMarker: Object.assign(this.state.activeMarker, marker)});
     this.setState({markers: Object.assign(this.state.markers, marker)});
     const venue = this.state.venues.find(venue => venue.id = marker.id);
     FourSquareAPI.getVenueDetails(marker.id).then(res => {
       const newVenue = Object.assign(venue, res.response.venue);
-      this.setState({venues: Object.assign(this.state.venues, newVenue)});
-      console.log(newVenue);
+      this.setState({activeMarker: Object.assign(this.state.activeMarker, newVenue)});
+      // console.log(newVenue);
     });
   };
+
+  // markerBounce = (marker) => {
+  //   if (marker.getAnimation() !== null) {
+  //     marker.setAnimation(null);
+  //   } else {
+  //     marker.setAnimation(window.google.maps.Animation.BOUNCE);
+  //     setTimeout(() => {marker.setAnimation(null)}, 500)
+  //   }
+  // }
 
   handleListItemClick = venue => {
     const marker = this.state.markers.find(marker => marker.id === venue.id);
@@ -57,6 +79,7 @@ class App extends Component {
           isOpen: false,
           isVisible: true,
           id: venue.id,
+          title: venue.name,
         };
       });
       this.setState({venues, center, markers});
