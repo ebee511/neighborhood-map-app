@@ -42,6 +42,7 @@ class Sidebar extends Component {
 	render() {
 		return (
 			<div className='sideBar'>
+				<h1>Coffee Grinds</h1>
 				<input 
 					type = 'search'
 					id = {'search'} 
