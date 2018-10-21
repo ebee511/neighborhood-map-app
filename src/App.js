@@ -46,6 +46,7 @@ class App extends Component {
     this.handleMarkerClick(marker);
   };
 
+  //Getting the venues and passing the info from FourSquare
   componentDidMount() {
     FourSquareAPI.search({
       near: "Tucson, AZ",
@@ -66,14 +67,16 @@ class App extends Component {
       });
       this.setState({venues, center, markers});
       console.log(results)
+    }).catch(err => {
+      alert('Sorry! There was an error retrieving the FourSquare API response. Please try again.')
     });
   }
 render() {
     return (
-    <div className="App">
+    <main className="App">
       <SideBar {...this.state} {...this.props} handleListItemClick={this.handleListItemClick}/>
       <Map {...this.state} handleMarkerClick={this.handleMarkerClick}/>
-    </div>
+    </main>
     );
   }
 }
