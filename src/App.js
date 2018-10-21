@@ -17,7 +17,6 @@ class App extends Component {
       this.setState(obj);
     }
   };
-  
 
   closeAllMarkers = () => {
     const markers = this.state.markers.map(marker => {
@@ -29,14 +28,6 @@ class App extends Component {
 
   handleMarkerClick = (marker) => {
     this.closeAllMarkers();
-    // this.markerBounce(marker);
-
-    if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(window.google.maps.Animation.BOUNCE);
-      setTimeout(() => {marker.setAnimation(null)}, 500)
-    }
     
     marker.isOpen = true;
     this.state.activeMarker = marker;
@@ -49,15 +40,6 @@ class App extends Component {
       // console.log(newVenue);
     });
   };
-
-  // markerBounce = (marker) => {
-  //   if (marker.getAnimation() !== null) {
-  //     marker.setAnimation(null);
-  //   } else {
-  //     marker.setAnimation(window.google.maps.Animation.BOUNCE);
-  //     setTimeout(() => {marker.setAnimation(null)}, 500)
-  //   }
-  // }
 
   handleListItemClick = venue => {
     const marker = this.state.markers.find(marker => marker.id === venue.id);
