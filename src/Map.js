@@ -18,9 +18,13 @@ const MyMapComponent = withScriptjs(
 		    			return (
 		    				<Marker 
 		    					key={index} 
+		    					title={marker.title}
 		    					position={{ lat: marker.lat, lng: marker.lng }}
-		    					animation = {window.google.maps.Animation.DROP}
-		    					onClick={() => props.handleMarkerClick(marker)}
+		    					// animation = {window.google.maps.Animation.DROP}
+		    					animation = {props.activeMarker.title === marker.title ? window.google.maps.Animation.BOUNCE : null}
+		    					onClick={
+		    						() => props.handleMarkerClick(marker)
+		    					}
 		    				>
 		    					{marker.isOpen && (
 		    						<InfoWindow>
@@ -28,6 +32,7 @@ const MyMapComponent = withScriptjs(
 		    								<p>{venueInfo.name}</p>
 		    								<p>{venueInfo.location.address}</p>
 		    								<p>Rating: {venueInfo.rating}</p>
+		    								<p>Data from FourSquareAPI</p>
 		    							</div>
 		    						</InfoWindow>
 		    					)}
@@ -50,7 +55,6 @@ export default class Map extends Component {
 			   loadingElement={<div style={{ height: `100%` }} />}
 			   containerElement={<div id='map' />}
 			  	mapElement={<div style={{ height: `100%` }} />}
-			  	role="Application base"
 			/>
 		);
 	}
