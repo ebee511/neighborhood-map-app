@@ -75,7 +75,6 @@ class App extends Component {
         };
       });
       this.setState({venues, center, markers});
-      console.log(results)
       //Catch for if venue results does not load.
     }).catch(err => {
       alert('Sorry! There was an error retrieving the FourSquare API response. Please try again.')
