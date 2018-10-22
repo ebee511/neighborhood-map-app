@@ -27,7 +27,7 @@ body, .app {
 
 
 /* Sidebar */
-.app-name {
+#app-name {
   text-align: center;
   font-size: 1.5rem;
 }
