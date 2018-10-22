@@ -41,8 +41,8 @@ class Sidebar extends Component {
 
 	render() {
 		return (
-			<aside className='sideBar' aria-role='Sidebar'>
-				<h1>Coffee Grinds</h1>
+			<aside className='sideBar' aria-labelledby='Sidebar'>
+				<h1 id='app-name'>Coffee Grinds</h1>
 				<input 
 					type = 'search'
 					id = {'search'} 
@@ -50,6 +50,7 @@ class Sidebar extends Component {
 					onChange ={this.handleChange}
 					value = {this.state.query}
 					aria-label='Type here to search a venue'
+					role = 'Search field'
 				/>
 				<VenueList 
 					{...this.props} 
