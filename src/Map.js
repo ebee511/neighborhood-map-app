@@ -12,6 +12,7 @@ const MyMapComponent = withScriptjs(
 	  	>
 		   {props.markers && 
 		    	props.markers
+		    	//Filters markers on the map and recreates showing markers with map method
 		    		.filter(marker => marker.isVisible)
 		    		.map((marker, index, arr) => {
 		    			const venueInfo = props.venues.find(venue => venue.id = marker.id);
@@ -20,13 +21,13 @@ const MyMapComponent = withScriptjs(
 		    					key={index} 
 		    					title={marker.title}
 		    					position={{ lat: marker.lat, lng: marker.lng }}
-		    					// animation = {window.google.maps.Animation.DROP}
 		    					animation = {props.activeMarker.title === marker.title ? window.google.maps.Animation.BOUNCE : null}
 		    					onClick={
 		    						() => props.handleMarkerClick(marker)
 		    					}
 		    				>
 		    					{marker.isOpen && (
+		    						//InfoWindow with details on what to render
 		    						<InfoWindow>
 		    							<div>
 		    								<p>{venueInfo.name}</p>
