@@ -27,6 +27,11 @@ body, .app {
 
 
 /* Sidebar */
+.app-name {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 .sideBar {
   width: 30%;
 }
