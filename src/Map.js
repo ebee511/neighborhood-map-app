@@ -1,6 +1,8 @@
 /* global google */
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
+import $ from 'jquery';
+import "./index.css";
 
 const MyMapComponent = withScriptjs(
 	withGoogleMap(props => (
@@ -46,17 +48,25 @@ const MyMapComponent = withScriptjs(
 	))
 );
 
+window.gm_authFailure = () => {
+    alert('There was a problem loading Google Maps! Please try to refresh!');
+    $('.gm-err-title').text('GOOGLE MAPS LOADING ERROR!')
+    $('.gm-err-message').text('Google Maps had a problem loading. Please refresh page!');
+};
+
 export default class Map extends Component {
+
 	render() {
 		return (
 			<MyMapComponent
 				{...this.props}
 	  			isMarkerShown
-	  			googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBIy3BoQwwxWi5E2burrVHBWeBPcNV8lVs 	"
+	  			googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBIy3BoQwwxWi5E2burrVHBWeBPcNV8lVs"
 			   loadingElement={<div style={{ height: `100%` }} />}
 			   containerElement={<div id='map' />}
 			  	mapElement={<div style={{ height: `100%` }} />}
 			/>
+
 		);
 	}
 }
